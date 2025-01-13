@@ -11,14 +11,11 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->withSum('entries as task_hours', 'hours')->where('status_id', 1)->whereHas('entries');
     }
-    public function getTotalHours()
-    {
-        return $this->tasks->flatMap(function ($task) {
-            return $task->entries;
-        })->sum('hours');
-    }
+   
+
 }

@@ -1,6 +1,5 @@
 <div class="col-12 row m-2">
 
-
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -10,12 +9,21 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($datas as $data)
-            <tr class="{{ $data['Sno'] ? 'table-active' : '' }}">
-                <td>{{ $data['Sno'] }}</td>
-                <td>{{ $data['Name'] }}</td>
-                <td>{{ $data['Total hours'] ?? '' }}</td>
+            @forelse ($projects as $project)
+
+            <tr class="table-active">
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $project->name }}</td>
+                <td>{{ $project->tasks->sum('task_hours') }}</td>
             </tr>
+            @foreach ($project->tasks as $task)
+            <tr class="">
+                <td></td>
+                <td>{{ $task->name }}</td>
+                <td>{{ $task->task_hours }}</td>
+            </tr>
+            @endforeach
+
             @empty
             <tr class="table-active">
                 <td colspan="3" class="text-center">No records</td>

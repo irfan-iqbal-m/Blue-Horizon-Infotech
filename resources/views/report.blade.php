@@ -23,7 +23,6 @@
         // Function to perform AJAX search
         function performSearch() {
             var search = $('#search-input').val();
-            console.log("jj");
             $.ajax({
                 url: "{{ route('search') }}",
                 method: 'POST',

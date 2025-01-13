@@ -12,10 +12,12 @@ class Task extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
+    
     public function entries()
     {
         return $this->hasMany(Entry::class);
